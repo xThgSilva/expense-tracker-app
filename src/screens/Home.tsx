@@ -1,5 +1,7 @@
 import { Text, View, ScrollView, TouchableOpacity } from "react-native"
 import { styles } from "../styles/Home"
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 type HomeProps = {
     name: string;
@@ -8,9 +10,7 @@ type HomeProps = {
 const Home = ({ name }: HomeProps) => {
     return (
         <View style={styles.container}>
-            <View style={styles.header}>
-                <Text style={styles.headerTitle}>Início</Text>
-            </View>
+            <Header headerTitle="Início" />
             <Text style={styles.welcomeText}>Olá, {name}!</Text>
             <View style={styles.optionsMenu} >
                 <Text style={styles.menuTitle}>Menu de Opções</Text>
@@ -71,7 +71,7 @@ const Home = ({ name }: HomeProps) => {
                     </View>
                 </ScrollView>
             </View>
-            <View style={styles.footer}></View>
+            <Footer />
         </View>
     )
 }

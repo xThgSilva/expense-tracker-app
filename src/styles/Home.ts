@@ -5,16 +5,6 @@ export const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: "#EAEAEA",
     },
-    header: {
-        height: 125,
-        backgroundColor: "#AC0000",
-        justifyContent: "center",
-        paddingHorizontal: 16
-    },
-    headerTitle: {
-        fontSize: 32,
-        color: "#FFF",
-    },
     welcomeText: {
         fontSize: 24,
         color: "#282828",
