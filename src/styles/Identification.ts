@@ -54,10 +54,3 @@ export const styles = StyleSheet.create({
         height: 100,
     }
 });
-
-
-// Backgrounds -> EAEAEA
-// Elementos Principais -> AC0000
-// Cor dos textos -> 282828
-// Cor de Fundo dos Botões -> D50303
-// Cor de Fundo dos Cards -> 8D8DD8

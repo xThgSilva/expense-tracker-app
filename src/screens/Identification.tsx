@@ -1,10 +1,13 @@
 import { View, Image, Text, TextInput, TouchableOpacity } from 'react-native';
 import { styles } from "../styles/Identification";
+import { useState } from 'react';
 
 const waveCorner = require("../assets/imgs/wave-corner-top.png");
 const pig = require("../assets/imgs/porquinho.png")
 
 export const Identification = () => {
+    const [inputName, setInputName] = useState<string>("");
+
     return (
         <View style={styles.container}>
             <Image source={waveCorner} />
@@ -14,7 +17,11 @@ export const Identification = () => {
             </View>
             <View style={styles.inputGroup}>
                 <Text style={styles.label}>Informe o seu nome:</Text>
-                <TextInput style={styles.input} />
+                <TextInput
+                    style={styles.input}
+                    value={inputName}
+                    onChangeText={setInputName}
+                />
                 <TouchableOpacity style={styles.confirmButton}>
                     <Text style={styles.confirmButtonText}>Confirmar</Text>
                 </TouchableOpacity>
