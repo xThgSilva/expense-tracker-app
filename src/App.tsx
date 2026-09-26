@@ -8,8 +8,8 @@ export default function App() {
     <>
       <StatusBar style="light" />
       {/* <Identification /> */}
-      <Home name={"Username"} />
-      {/* <RegisterExpense /> */}
+      {/* <Home name={"Username"} /> */}
+      <RegisterExpense />
     </>
   );
 }
