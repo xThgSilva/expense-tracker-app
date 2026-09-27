@@ -6,9 +6,17 @@ import Footer from "../components/Footer";
 import CardExpense from "../components/CardExpense";
 import Modal from "react-native-modal";
 import { useState } from "react";
+import HorizontalButtonScroll from "../components/HorizontalScrollView";
 
 const AllExpenses = () => {
-    const [isOpen, setIsOpen] = useState<boolean>(false)
+    const filterButtons = [
+        { id: "1", label: "Últimos 7 dias", onPress: () => {  setFilterType(7)  } },
+        { id: "2", label: "Últimos 14 dias", onPress: () => { setFilterType(14) } },
+        { id: "3", label: "Últimos 30 dias", onPress: () => { setFilterType(30) } },
+    ];
+
+    const [isOpen, setIsOpen] = useState<boolean>(false);
+    const [filterType, setFilterType] = useState<7 | 14 | 30>(7)
 
     return (
         <View style={styles.container}>
@@ -16,24 +24,16 @@ const AllExpenses = () => {
             <TouchableOpacity style={styles.goBackButton}>
                 <FontAwesome name='arrow-left' style={styles.goBackButtonIcon} /><Text style={styles.goBackButtonText}>Voltar</Text>
             </TouchableOpacity>
-            <View>
+            <View style={styles.filterContainer}>
                 <View style={styles.filterHeader}>
                     <Text style={styles.filterHeaderText}>Adicionar um filtro:</Text>
                     <TouchableOpacity style={styles.calendarButton}>
                         <FontAwesome name="calendar" style={styles.calendarButtonIcon} />
                     </TouchableOpacity>
                 </View>
-                <ScrollView style={styles.optionsFilter} horizontal={true} showsHorizontalScrollIndicator={false}>
-                    <TouchableOpacity style={styles.filterButton}>
-                        <Text style={styles.filterButtonText}>Últimos 7 dias</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.filterButton}>
-                        <Text style={styles.filterButtonText}>Últimos 14 dias</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.filterButton}>
-                        <Text style={styles.filterButtonText}>Últimos 30 dias</Text>
-                    </TouchableOpacity>
-                </ScrollView>
+                <HorizontalButtonScroll
+                    buttons={filterButtons}
+                />
             </View>
             <View style={styles.filterList}>
                 <View style={styles.filterListHeader}>

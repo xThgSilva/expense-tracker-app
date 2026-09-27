@@ -19,15 +19,19 @@ export const styles = StyleSheet.create({
     goBackButtonText: {
         fontSize: 18
     },
+    filterContainer: {
+        padding: 12,
+        gap: 16
+    },
     filterHeader: {
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
-        paddingHorizontal: 12
+        paddingHorizontal: 0 
     },
     filterHeaderText: {
         color: "#282828",
-        fontSize: 20
+        fontSize: 24
     },
     calendarButton: {
         paddingVertical: 8,
