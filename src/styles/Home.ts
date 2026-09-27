@@ -33,6 +33,7 @@ export const styles = StyleSheet.create({
     lastExpenses: {
         padding: 12,
         gap: 16,
+        paddingBottom: 12,
         flex: 1
     },
     lastExpensesText: {

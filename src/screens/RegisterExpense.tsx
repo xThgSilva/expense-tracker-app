@@ -1,16 +1,16 @@
-import React, { useState } from 'react'
-import { View, Text, TouchableOpacity, TextInput } from 'react-native'
-import { styles } from '../styles/RegisterExpense'
-import { FontAwesome } from "@react-native-vector-icons/fontawesome"
-import Header from '../components/Header'
-import Footer from '../components/Footer'
+import React, { useState } from 'react';
+import { View, Text, TouchableOpacity, TextInput } from 'react-native';
+import { styles } from '../styles/RegisterExpense';
+import { FontAwesome } from "@react-native-vector-icons/fontawesome";
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 const RegisterExpense = () => {
   const [expenseTitle, setExpenseTitle] = useState<string>("");
   const [expenseDescription, setExpenseDescription] = useState<string>("");
   const [expenseValue, setExpenseValue] = useState<string>("");
 
-  const [statusStyle, setStatusStyle] = useState<"success" | "error">("error")
+  const [statusStyle, setStatusStyle] = useState<"success" | "error" | "">("");
   const [status, setStatus] = useState<string>("");
 
   const handleRegisterExpense = () => {
@@ -21,12 +21,12 @@ const RegisterExpense = () => {
     } catch (error) {
       if (error instanceof Error) {
         setStatus(error.message);
-        setStatusStyle("error")
+        setStatusStyle("error");
       }
       return;
     }
 
-    setStatusStyle("success")
+    setStatusStyle("success");
     setStatus("Despesa registrada! Voltando...");
   };
 

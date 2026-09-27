@@ -1,5 +1,5 @@
-import { Text, View, ScrollView, TouchableOpacity } from "react-native"
-import { styles } from "../styles/Home"
+import { Text, View, ScrollView, TouchableOpacity } from "react-native";
+import { styles } from "../styles/Home";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 

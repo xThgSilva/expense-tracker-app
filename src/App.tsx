@@ -2,6 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { Identification } from './screens/Identification';
 import Home from './screens/Home';
 import RegisterExpense from './screens/RegisterExpense';
+import AllExpenses from './screens/AllExpenses';
 
 export default function App() {
   return (
@@ -9,7 +10,8 @@ export default function App() {
       <StatusBar style="light" />
       {/* <Identification /> */}
       {/* <Home name={"Username"} /> */}
-      <RegisterExpense />
+      {/* <RegisterExpense /> */}
+      <AllExpenses />
     </>
   );
 }
