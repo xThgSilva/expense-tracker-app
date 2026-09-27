@@ -3,6 +3,7 @@ import { FontAwesome } from "@react-native-vector-icons/fontawesome";
 import { styles } from "../styles/AllExpenses"
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import CardExpense from "../components/CardExpense";
 import Modal from "react-native-modal";
 import { useState } from "react";
 
@@ -45,56 +46,36 @@ const AllExpenses = () => {
                     </TouchableOpacity>
                 </View>
                 <ScrollView style={styles.expensesList} showsHorizontalScrollIndicator={false}>
-                    <View style={styles.expenseCard}>
-                        <View style={styles.cardHeader}>
-                            <Text style={styles.expenseTitle}>Nome da Despesa</Text>
-                            <Text style={styles.expenseValue}>R$ 100,00</Text>
-                        </View>
-                        <View style={styles.cardContent}>
-                            <Text style={styles.expenseDescription}>Compra de não sei o que mais não sei o que lá</Text>
-                            <Text style={styles.expenseDate}>Data: 24/09/2026 - 16:41</Text>
-                        </View>
-                    </View>
-                    <View style={styles.expenseCard}>
-                        <View style={styles.cardHeader}>
-                            <Text style={styles.expenseTitle}>Nome da Despesa</Text>
-                            <Text style={styles.expenseValue}>R$ 100,00</Text>
-                        </View>
-                        <View style={styles.cardContent}>
-                            <Text style={styles.expenseDescription}>Compra de não sei o que mais não sei o que lá</Text>
-                            <Text style={styles.expenseDate}>Data: 24/09/2026 - 16:41</Text>
-                        </View>
-                    </View>
-                    <View style={styles.expenseCard}>
-                        <View style={styles.cardHeader}>
-                            <Text style={styles.expenseTitle}>Nome da Despesa</Text>
-                            <Text style={styles.expenseValue}>R$ 100,00</Text>
-                        </View>
-                        <View style={styles.cardContent}>
-                            <Text style={styles.expenseDescription}>Compra de não sei o que mais não sei o que lá</Text>
-                            <Text style={styles.expenseDate}>Data: 24/09/2026 - 16:41</Text>
-                        </View>
-                    </View>
-                    <View style={styles.expenseCard}>
-                        <View style={styles.cardHeader}>
-                            <Text style={styles.expenseTitle}>Nome da Despesa</Text>
-                            <Text style={styles.expenseValue}>R$ 100,00</Text>
-                        </View>
-                        <View style={styles.cardContent}>
-                            <Text style={styles.expenseDescription}>Compra de não sei o que mais não sei o que lá</Text>
-                            <Text style={styles.expenseDate}>Data: 24/09/2026 - 16:41</Text>
-                        </View>
-                    </View>
-                    <View style={styles.expenseCard}>
-                        <View style={styles.cardHeader}>
-                            <Text style={styles.expenseTitle}>Nome da Despesa</Text>
-                            <Text style={styles.expenseValue}>R$ 100,00</Text>
-                        </View>
-                        <View style={styles.cardContent}>
-                            <Text style={styles.expenseDescription}>Compra de não sei o que mais não sei o que lá</Text>
-                            <Text style={styles.expenseDate}>Data: 24/09/2026 - 16:41</Text>
-                        </View>
-                    </View>
+                    <CardExpense
+                        title={"Minha Despesa"}
+                        value={100}
+                        description={"Uma grande despesa"}
+                        date={"14/06/2026 - 16:41"}
+                    />
+                    <CardExpense
+                        title={"Minha Despesa"}
+                        value={100}
+                        description={"Uma grande despesa"}
+                        date={"14/06/2026 - 16:41"}
+                    />
+                    <CardExpense
+                        title={"Minha Despesa"}
+                        value={100}
+                        description={"Uma grande despesa"}
+                        date={"14/06/2026 - 16:41"}
+                    />
+                    <CardExpense
+                        title={"Minha Despesa"}
+                        value={100}
+                        description={"Uma grande despesa"}
+                        date={"14/06/2026 - 16:41"}
+                    />
+                    <CardExpense
+                        title={"Minha Despesa"}
+                        value={100}
+                        description={"Uma grande despesa"}
+                        date={"14/06/2026 - 16:41"}
+                    />
                 </ScrollView>
             </View>
             <Footer />
