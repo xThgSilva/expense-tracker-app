@@ -1,6 +1,7 @@
 import { View, Image, Text, TextInput, TouchableOpacity } from 'react-native';
 import { styles } from "../styles/Identification";
 import { useState } from 'react';
+import Footer from '../components/Footer';
 
 const waveCorner = require("../assets/imgs/wave-corner-top.png");
 const pig = require("../assets/imgs/porquinho.png")
@@ -28,7 +29,7 @@ export const Identification = () => {
             </View>
             <View>
                 <Image style={styles.pig} source={pig} />
-                <View style={styles.footer}></View>
+                <Footer />
             </View>
         </View>
     )

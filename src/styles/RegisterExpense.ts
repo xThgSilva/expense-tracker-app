@@ -14,10 +14,10 @@ export const styles = StyleSheet.create({
        paddingHorizontal: 20
     },
     goBackButtonIcon: {
-        fontSize: 20
+        fontSize: 18
     },
     goBackButtonText: {
-        fontSize: 20
+        fontSize: 18
     },
     registerExpenseForm: {
         backgroundColor: "#DDDDDD",
@@ -27,7 +27,7 @@ export const styles = StyleSheet.create({
         paddingHorizontal: 32,
         borderRadius: 12,
         marginTop: 48,
-        width: 300
+        width: 350
     },
     formTitle: {
         fontSize: 24,
@@ -44,16 +44,17 @@ export const styles = StyleSheet.create({
     input: {
         borderWidth: 1,
         borderRadius: 12,
-        borderColor: "#6B6B6B",
+        borderColor: "#C3C1C1",
         paddingVertical: 12,
         paddingHorizontal: 24,
     },
     confirmButton: {
         alignSelf: "center",
-        backgroundColor: "#D91B1B",
+        backgroundColor: "#D50303",
         paddingVertical: 12,
         paddingHorizontal: 24,
-        borderRadius: 12
+        borderRadius: 12,
+        fontWeight: 600
     },
     confirmButtonText: {
         color: "#FFF",
@@ -66,7 +67,7 @@ export const styles = StyleSheet.create({
     },
     error: {
         textAlign: "center",
-        color: "#990303",
+        color: "#D50303",
         fontSize: 16
     }
 });

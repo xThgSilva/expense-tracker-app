@@ -8,7 +8,8 @@ export const styles = StyleSheet.create({
     welcomeText: {
         fontSize: 24,
         color: "#282828",
-        margin: 12
+        margin: 12,
+        fontWeight: 600
     },
     optionsMenu: {
         padding: 12,
@@ -24,7 +25,7 @@ export const styles = StyleSheet.create({
         paddingVertical: 12,
         paddingHorizontal: 24,
         borderRadius: 12,
-        marginHorizontal: 4
+        marginHorizontal: 6
     },
     textMenuButton: {
         color: "#FFF",
@@ -33,16 +34,11 @@ export const styles = StyleSheet.create({
     lastExpenses: {
         padding: 12,
         gap: 16,
-        paddingBottom: 12,
         flex: 1
     },
     lastExpensesText: {
         fontSize: 24,
         fontWeight: "bold",
         color: "#282828"
-    },
-    footer: {
-        backgroundColor: "#AC0000",
-        height: 75
     }
 });

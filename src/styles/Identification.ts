@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
         backgroundColor: "#EAEAEA",
     },
     title: {
-        fontSize: 32,
+        fontSize: 28,
         fontWeight: "bold",
         textAlign: "center"
     },
@@ -24,8 +24,8 @@ export const styles = StyleSheet.create({
         fontSize: 20,
     },
     input:{
-        borderWidth: 2,
-        borderColor: "#6B6B6B",
+        borderWidth: 1,
+        borderColor: "#C3C1C1",
         borderRadius: 12,
         width: "50%",
         fontSize: 16,
@@ -34,15 +34,17 @@ export const styles = StyleSheet.create({
     },
     confirmButton: {
         marginTop: 16,
-        backgroundColor: "#AC0000",
+        backgroundColor: "#D50303",
         paddingVertical: 16, 
         paddingHorizontal: 23,
         borderRadius: 12,
         width: 150 
     },
     confirmButtonText: {
-        color: "white",
-        textAlign: "center"
+        color: "#FFF",
+        textAlign: "center",
+        fontWeight: 600,
+        fontSize: 16
     },
     pig: {
         resizeMode: "contain",

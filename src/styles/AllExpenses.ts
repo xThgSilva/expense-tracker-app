@@ -38,7 +38,7 @@ export const styles = StyleSheet.create({
         paddingHorizontal: 8
     },
     calendarButtonIcon: {
-        color: "#AC0000",
+        color: "#D50303",
         fontSize: 28
     },
     optionsFilter: {
@@ -53,9 +53,7 @@ export const styles = StyleSheet.create({
         marginHorizontal: 4,
     },
     filterButtonText: {
-        color: "#FFF",
-        fontSize: 14,
-        textAlign: "center"
+        fontSize: 16,
     },
     filterSection: {
         flex: 1,
@@ -69,14 +67,13 @@ export const styles = StyleSheet.create({
     },
     filterSectionHeaderText: {
         color: "#282828",
-        fontSize: 20,
+        fontSize: 24,
     },
     filterList: {
         padding: 12
     },
     questionButtonText: {
-        fontSize: 20,
-        marginLeft: 32
+        fontSize: 16,
     },
     relatoryButton: {
         backgroundColor: "#D50303",
@@ -87,7 +84,7 @@ export const styles = StyleSheet.create({
     relatoryButtonText: {
         color: "#FFF",
         textAlign: "center",
-        fontSize: 14
+        fontSize: 16
     },
     expensesListContainer: {
         flex: 1,
@@ -141,7 +138,8 @@ export const styles = StyleSheet.create({
     },
     modalTitle: {
         color: "#282828",
-        fontSize: 20
+        fontSize: 20,
+        fontWeight: 600
     },
     modalText: {
         color: "#282828",

@@ -92,7 +92,7 @@ const Configurations = () => {
             >
                 <View style={styles.modalContent}>
                     <Text style={styles.modalTitle}>Enviar para nuvem</Text>
-                    <Text style={styles.modalText}>Esta função ainda esta em desenvolvimento.</Text>
+                    <Text style={styles.modalText}>Esta função ainda está em desenvolvimento.</Text>
                     <TouchableOpacity style={styles.modalLeftButton} onPress={() => setSendCloudModal(false)}>
                         <Text style={styles.modalLeftButtonText}>Entendi</Text>
                     </TouchableOpacity>

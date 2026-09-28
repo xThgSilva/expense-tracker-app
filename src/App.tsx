@@ -8,10 +8,10 @@ import Configurations from './screens/Configurations';
 export default function App() {
   return (
     <>
-      <StatusBar style="light" />
       {/* <Identification /> */}
       {/* <Home name={"Username"} /> */}
       {/* <RegisterExpense /> */}
+      {/* <AllExpenses /> */}
       <Configurations />
     </>
   );
