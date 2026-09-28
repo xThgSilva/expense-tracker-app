@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { Children } from 'react'
 import { View, Text } from 'react-native';
+import FontAwesome from '@react-native-vector-icons/fontawesome';
 
 import { styles } from "../styles/Header"
 
