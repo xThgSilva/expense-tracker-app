@@ -3,7 +3,7 @@ import { styles } from "../styles/Home";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import CardExpense from "../components/CardExpense";
-import HorizontalButtonScroll from "../components/HorizontalScrollView";
+import Button from "../components/Button";
 
 type HomeProps = {
     name: string;
@@ -22,9 +22,16 @@ const Home = ({ name }: HomeProps) => {
             <Text style={styles.welcomeText}>Olá, {name}!</Text>
             <View style={styles.optionsMenu} >
                 <Text style={styles.menuTitle}>Menu de Opções</Text>
-                <HorizontalButtonScroll
-                    buttons={menuButtons}
-                />
+                <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+                    {menuButtons.map(button => (
+                        <Button
+                            key={button.id}
+                            label={button.label}
+                            buttonStyle={styles.menuButton}
+                            onPress={button.onPress}
+                        />
+                    ))}
+                </ScrollView>
             </View>
             <View style={styles.lastExpenses}>
                 <Text style={styles.lastExpensesText}>Despesas mais recentes</Text>
@@ -62,7 +69,7 @@ const Home = ({ name }: HomeProps) => {
                 </ScrollView>
             </View>
             <Footer />
-        </View>
+        </View >
     )
 }
 

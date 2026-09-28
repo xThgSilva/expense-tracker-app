@@ -4,8 +4,5 @@ export const styles = StyleSheet.create({
     scrollContainer: {
         paddingVertical: 12,
         gap: 16,
-    },
-    button: {
-        marginHorizontal: 4
     }
 });

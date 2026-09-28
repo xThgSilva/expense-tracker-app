@@ -6,11 +6,11 @@ import Footer from "../components/Footer";
 import CardExpense from "../components/CardExpense";
 import Modal from "react-native-modal";
 import { useState } from "react";
-import HorizontalButtonScroll from "../components/HorizontalScrollView";
+import Button from "../components/Button";
 
 const AllExpenses = () => {
     const filterButtons = [
-        { id: "1", label: "Últimos 7 dias", onPress: () => {  setFilterType(7)  } },
+        { id: "1", label: "Últimos 7 dias", onPress: () => { setFilterType(7) } },
         { id: "2", label: "Últimos 14 dias", onPress: () => { setFilterType(14) } },
         { id: "3", label: "Últimos 30 dias", onPress: () => { setFilterType(30) } },
     ];
@@ -31,13 +31,20 @@ const AllExpenses = () => {
                         <FontAwesome name="calendar" style={styles.calendarButtonIcon} />
                     </TouchableOpacity>
                 </View>
-                <HorizontalButtonScroll
-                    buttons={filterButtons}
-                />
+                <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+                    {filterButtons.map(button => (
+                        <Button
+                            key={button.id}
+                            label={button.label}
+                            buttonStyle={styles.filterButton}
+                            onPress={button.onPress}
+                        />
+                    ))}
+                </ScrollView>
             </View>
-            <View style={styles.filterList}>
-                <View style={styles.filterListHeader}>
-                    <Text style={styles.filterListHeaderText}>Lista de Despesas</Text>
+            <View style={styles.filterSection}>
+                <View style={styles.filterSectionHeader}>
+                    <Text style={styles.filterSectionHeaderText}>Lista de Despesas</Text>
                     <TouchableOpacity onPress={() => setIsOpen(true)}>
                         <FontAwesome style={styles.questionButtonText} name="question-circle" />
                     </TouchableOpacity>
@@ -45,7 +52,7 @@ const AllExpenses = () => {
                         <Text style={styles.relatoryButtonText}>Gerar Relatório</Text>
                     </TouchableOpacity>
                 </View>
-                <ScrollView style={styles.expensesList} showsHorizontalScrollIndicator={false}>
+                <ScrollView showsVerticalScrollIndicator={false} style={styles.filterList}>
                     <CardExpense
                         title={"Minha Despesa"}
                         value={100}

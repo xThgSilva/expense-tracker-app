@@ -57,19 +57,22 @@ export const styles = StyleSheet.create({
         fontSize: 14,
         textAlign: "center"
     },
-    filterList: {
+    filterSection: {
         flex: 1,
-        paddingBottom: 12,
+        paddingBottom: 12
     },
-    filterListHeader: {
+    filterSectionHeader: {
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
         padding: 12
     },
-    filterListHeaderText: {
+    filterSectionHeaderText: {
         color: "#282828",
         fontSize: 20,
+    },
+    filterList: {
+        padding: 12
     },
     questionButtonText: {
         fontSize: 20,
