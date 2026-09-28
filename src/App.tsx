@@ -1,4 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
+import { useState, useEffect } from 'react';
 import Identification from './screens/Identification';
 import Home from './screens/Home';
 import RegisterExpense from './screens/RegisterExpense';
@@ -7,22 +8,42 @@ import Configurations from './screens/Configurations';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { handleGetName } from './services/service';
 
 export type AppScreens = {
   Identification: undefined;
-  Home: { name: string };
+  Home: undefined;
   RegisterExpense: undefined;
   AllExpenses: undefined;
   Configurations: undefined;
 };
 
 export default function App() {
+  const [savedName, setSavedName] = useState<string | undefined>(undefined);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadName = async () => {
+      const name = await handleGetName();
+
+      setSavedName(name);
+      setLoading(false);
+    };
+
+    loadName();
+  }, []);
+
+  if (loading) {
+    return null;
+  }
   const Stack = createNativeStackNavigator<AppScreens>();
 
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name='Identification' component={Identification} />
+        {!savedName && (
+          <Stack.Screen name='Identification' component={Identification} />
+        )}
         <Stack.Screen name='Home' component={Home} />
         <Stack.Screen name='RegisterExpense' component={RegisterExpense} />
         <Stack.Screen name='AllExpenses' component={AllExpenses} />

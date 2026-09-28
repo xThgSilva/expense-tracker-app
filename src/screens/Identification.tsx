@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Footer from '../components/Footer';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { AppScreens } from '../App';
+import { handleSaveName } from '../services/service';
 
 const waveCorner = require("../assets/imgs/wave-corner-top.png");
 const pig = require("../assets/imgs/porquinho.png")
@@ -13,14 +14,13 @@ type IdentificationProps = NativeStackScreenProps<AppScreens, "Identification">;
 const Identification = ({ navigation }: IdentificationProps) => {
     const [name, setName] = useState<string>("");
 
-    const handleUserIdentification = () => {
-        if (name != "") {
-            setName("");
-            navigation.navigate("Home", { name });
-        } else {
-            // TODO - error return to user'
+    const handleSave = async () => {
+        const saved = await handleSaveName(name);
+
+        if (saved) {
+            navigation.navigate("Home");
         }
-    }
+    };
 
     return (
         <View style={styles.container}>
@@ -36,7 +36,7 @@ const Identification = ({ navigation }: IdentificationProps) => {
                     value={name}
                     onChangeText={setName}
                 />
-                <TouchableOpacity style={styles.confirmButton} onPress={handleUserIdentification}>
+                <TouchableOpacity style={styles.confirmButton} onPress={handleSave}>
                     <Text style={styles.confirmButtonText}>Confirmar</Text>
                 </TouchableOpacity>
             </View>

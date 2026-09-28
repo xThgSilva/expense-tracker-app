@@ -17,9 +17,6 @@ const RegisterExpense = ({ navigation }: RegisterExpenseProps) => {
   const [statusStyle, setStatusStyle] = useState<"success" | "error" | "">("");
   const [status, setStatus] = useState<string>("");
 
-  // For tests
-  const name = "Username"
-
   const handleRegisterExpense = () => {
     try {
       if (expenseTitle === "" || expenseValue === "") {
@@ -35,13 +32,13 @@ const RegisterExpense = ({ navigation }: RegisterExpenseProps) => {
 
     setStatusStyle("success");
     setStatus("Despesa registrada! Voltando...");
-    navigation.navigate("Home", { name });
+    navigation.navigate("Home");
   };
 
   return (
     <View style={styles.container}>
       <Header headerTitle='Área de Registro' />
-      <TouchableOpacity style={styles.goBackButton} onPress={() => navigation.navigate("Home", { name  })}>
+      <TouchableOpacity style={styles.goBackButton} onPress={() => navigation.navigate("Home")}>
         <FontAwesome name='arrow-left' style={styles.goBackButtonIcon} /><Text style={styles.goBackButtonText}>Voltar</Text>
       </TouchableOpacity>
       <View style={styles.registerExpenseForm}>

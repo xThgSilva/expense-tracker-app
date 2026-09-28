@@ -15,12 +15,10 @@ const Configurations = ({ navigation }: ConfigurationsProps) => {
     const [importDataModal, setImportDataModal] = useState<boolean>(false);
     const [sendCloudModal, setSendCloudModal] = useState<boolean>(false);
 
-    const name = "Username"
-
     return (
         <View style={styles.container}>
             <Header headerTitle={"Configurações"} />
-            <TouchableOpacity style={styles.goBackButton} onPress={() => navigation.navigate("Home",{ name })}>
+            <TouchableOpacity style={styles.goBackButton} onPress={() => navigation.navigate("Home")}>
                 <FontAwesome name='arrow-left' style={styles.goBackButtonIcon} /><Text style={styles.goBackButtonText}>Voltar</Text>
             </TouchableOpacity>
             <View style={styles.configOptionsContainer}>

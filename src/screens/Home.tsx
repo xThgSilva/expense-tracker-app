@@ -6,16 +6,31 @@ import CardExpense from "../components/CardExpense";
 import Button from "../components/Button";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { AppScreens } from "../App";
+import { useEffect, useState } from "react";
+import { handleGetName } from "../services/service";
 
 type HomeProps = NativeStackScreenProps<AppScreens, "Home">;
 
-const Home = ({ navigation, route }: HomeProps) => {
-    const name = route.params.name;
+const Home = ({ navigation }: HomeProps) => {
     const menuButtons = [
         { id: "1", label: "Registrar Despesa", onPress: () => { navigation.navigate("RegisterExpense") } },
         { id: "2", label: "Ver Todas", onPress: () => { navigation.navigate("AllExpenses") } },
         { id: "3", label: "Configurações", onPress: () => { navigation.navigate("Configurations") } },
     ];
+    
+    const [name, setName] = useState<string>("");
+
+    useEffect(() => {
+        const loadName = async () => {
+            const savedName = await handleGetName();
+
+            if (savedName) {
+                setName(savedName);
+            }
+        };
+
+        loadName();
+    }, []);
 
     return (
         <View style={styles.container}>

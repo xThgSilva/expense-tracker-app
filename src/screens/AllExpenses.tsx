@@ -19,15 +19,13 @@ const AllExpenses = ({ navigation }: AllEspensesProps) => {
         { id: "3", label: "Últimos 30 dias", onPress: () => { setFilterType(30) } },
     ];
 
-    const name = "Username"
-
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [filterType, setFilterType] = useState<7 | 14 | 30>(7)
 
     return (
         <View style={styles.container}>
             <Header headerTitle="Minhas Despesas" />
-            <TouchableOpacity style={styles.goBackButton} onPress={() => navigation.navigate("Home", { name })}>
+            <TouchableOpacity style={styles.goBackButton} onPress={() => navigation.navigate("Home")}>
                 <FontAwesome name='arrow-left' style={styles.goBackButtonIcon} /><Text style={styles.goBackButtonText}>Voltar</Text>
             </TouchableOpacity>
             <View style={styles.filterContainer}>
