@@ -4,16 +4,17 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import CardExpense from "../components/CardExpense";
 import Button from "../components/Button";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { AppScreens } from "../App";
 
-type HomeProps = {
-    name: string;
-};
+type HomeProps = NativeStackScreenProps<AppScreens, "Home">;
 
-const Home = ({ name }: HomeProps) => {
+const Home = ({ navigation, route }: HomeProps) => {
+    const name = route.params.name;
     const menuButtons = [
-        { id: "1", label: "Registrar Despesa", onPress: () => { } },
-        { id: "2", label: "Ver Todas", onPress: () => { } },
-        { id: "3", label: "Configurações", onPress: () => { } },
+        { id: "1", label: "Registrar Despesa", onPress: () => { navigation.navigate("RegisterExpense") } },
+        { id: "2", label: "Ver Todas", onPress: () => { navigation.navigate("AllExpenses") } },
+        { id: "3", label: "Configurações", onPress: () => { navigation.navigate("Configurations") } },
     ];
 
     return (

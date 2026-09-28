@@ -5,16 +5,22 @@ import { styles } from "../styles/Configurations";
 import FontAwesome from "@react-native-vector-icons/fontawesome";
 import { useState } from "react";
 import Modal from "react-native-modal";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { AppScreens } from "../App";
 
-const Configurations = () => {
+type ConfigurationsProps = NativeStackScreenProps<AppScreens, "Configurations">;
+
+const Configurations = ({ navigation }: ConfigurationsProps) => {
     const [exportDataModal, setExportDataModal] = useState<boolean>(false);
     const [importDataModal, setImportDataModal] = useState<boolean>(false);
     const [sendCloudModal, setSendCloudModal] = useState<boolean>(false);
 
+    const name = "Username"
+
     return (
         <View style={styles.container}>
             <Header headerTitle={"Configurações"} />
-            <TouchableOpacity style={styles.goBackButton}>
+            <TouchableOpacity style={styles.goBackButton} onPress={() => navigation.navigate("Home",{ name })}>
                 <FontAwesome name='arrow-left' style={styles.goBackButtonIcon} /><Text style={styles.goBackButtonText}>Voltar</Text>
             </TouchableOpacity>
             <View style={styles.configOptionsContainer}>

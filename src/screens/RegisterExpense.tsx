@@ -4,14 +4,21 @@ import { styles } from '../styles/RegisterExpense';
 import { FontAwesome } from "@react-native-vector-icons/fontawesome";
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { AppScreens } from '../App';
 
-const RegisterExpense = () => {
+type RegisterExpenseProps = NativeStackScreenProps<AppScreens, "RegisterExpense">;
+
+const RegisterExpense = ({ navigation }: RegisterExpenseProps) => {
   const [expenseTitle, setExpenseTitle] = useState<string>("");
   const [expenseDescription, setExpenseDescription] = useState<string>("");
   const [expenseValue, setExpenseValue] = useState<string>("");
 
   const [statusStyle, setStatusStyle] = useState<"success" | "error" | "">("");
   const [status, setStatus] = useState<string>("");
+
+  // For tests
+  const name = "Username"
 
   const handleRegisterExpense = () => {
     try {
@@ -28,12 +35,13 @@ const RegisterExpense = () => {
 
     setStatusStyle("success");
     setStatus("Despesa registrada! Voltando...");
+    navigation.navigate("Home", { name });
   };
 
   return (
     <View style={styles.container}>
       <Header headerTitle='Área de Registro' />
-      <TouchableOpacity style={styles.goBackButton}>
+      <TouchableOpacity style={styles.goBackButton} onPress={() => navigation.navigate("Home", { name  })}>
         <FontAwesome name='arrow-left' style={styles.goBackButtonIcon} /><Text style={styles.goBackButtonText}>Voltar</Text>
       </TouchableOpacity>
       <View style={styles.registerExpenseForm}>

@@ -7,13 +7,19 @@ import CardExpense from "../components/CardExpense";
 import Modal from "react-native-modal";
 import { useState } from "react";
 import Button from "../components/Button";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { AppScreens } from "../App";
 
-const AllExpenses = () => {
+type AllEspensesProps = NativeStackScreenProps<AppScreens, "AllExpenses">;
+
+const AllExpenses = ({ navigation }: AllEspensesProps) => {
     const filterButtons = [
         { id: "1", label: "Últimos 7 dias", onPress: () => { setFilterType(7) } },
         { id: "2", label: "Últimos 14 dias", onPress: () => { setFilterType(14) } },
         { id: "3", label: "Últimos 30 dias", onPress: () => { setFilterType(30) } },
     ];
+
+    const name = "Username"
 
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [filterType, setFilterType] = useState<7 | 14 | 30>(7)
@@ -21,7 +27,7 @@ const AllExpenses = () => {
     return (
         <View style={styles.container}>
             <Header headerTitle="Minhas Despesas" />
-            <TouchableOpacity style={styles.goBackButton}>
+            <TouchableOpacity style={styles.goBackButton} onPress={() => navigation.navigate("Home", { name })}>
                 <FontAwesome name='arrow-left' style={styles.goBackButtonIcon} /><Text style={styles.goBackButtonText}>Voltar</Text>
             </TouchableOpacity>
             <View style={styles.filterContainer}>
