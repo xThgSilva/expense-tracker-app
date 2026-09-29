@@ -4,7 +4,7 @@ import { styles }from "../styles/CardExpense";
 type ExpenseCard = {
     title: string;
     value: number;
-    description: string;
+    description: string | null;
     date: string
 };
 
@@ -16,7 +16,7 @@ const CardExpense = ({title, value, description, date}: ExpenseCard) => {
                 <Text style={styles.expenseValue}>R${value}</Text>
             </View>
             <View style={styles.cardContent}>
-                <Text style={styles.expenseDescription}>{description}</Text>
+                <Text style={styles.expenseDescription}>{description ? description : "Descrição não informada"}</Text>
                 <Text style={styles.expenseDate}>Data: {date}</Text>
             </View>
         </View>

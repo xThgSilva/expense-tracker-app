@@ -4,7 +4,7 @@ import Identification from './screens/Identification';
 import Home from './screens/Home';
 import RegisterExpense from './screens/RegisterExpense';
 import AllExpenses from './screens/AllExpenses';
-import Configurations from './screens/Configurations';
+import Settings from './screens/Settings';
 import Loading from './screens/Loading';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -15,7 +15,7 @@ export type AppScreens = {
   Home: undefined;
   RegisterExpense: undefined;
   AllExpenses: undefined;
-  Configurations: undefined;
+  Settings: undefined;
 };
 
 export default function App() {
@@ -41,7 +41,7 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <StatusBar style='inverted'/>
+      <StatusBar style='inverted' />
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         {!savedName && (
           <Stack.Screen name='Identification' component={Identification} />
@@ -49,7 +49,7 @@ export default function App() {
         <Stack.Screen name='Home' component={Home} />
         <Stack.Screen name='RegisterExpense' component={RegisterExpense} />
         <Stack.Screen name='AllExpenses' component={AllExpenses} />
-        <Stack.Screen name='Configurations' component={Configurations} />
+        <Stack.Screen name='Settings' component={Settings} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -1,14 +1,14 @@
 import { View, TouchableOpacity, Text } from "react-native";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { styles } from "../styles/Configurations";
+import { styles } from "../styles/Settings";
 import FontAwesome from "@react-native-vector-icons/fontawesome";
 import { useState } from "react";
 import Modal from "react-native-modal";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { AppScreens } from "../App";
 
-type ConfigurationsProps = NativeStackScreenProps<AppScreens, "Configurations">;
+type ConfigurationsProps = NativeStackScreenProps<AppScreens, "Settings">;
 
 const Configurations = ({ navigation }: ConfigurationsProps) => {
     const [exportDataModal, setExportDataModal] = useState<boolean>(false);

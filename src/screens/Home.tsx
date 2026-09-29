@@ -1,4 +1,4 @@
-import { Text, View, ScrollView, TouchableOpacity } from "react-native";
+import { Text, View, ScrollView } from "react-native";
 import { styles } from "../styles/Home";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -7,7 +7,9 @@ import Button from "../components/Button";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { AppScreens } from "../App";
 import { useEffect, useState } from "react";
-import { handleGetName, handleRemoveName } from "../services/service";
+import { handleGetName } from "../services/service";
+import { Expense } from "../interfaces/interfaces";
+import { getAllExpenses } from "../database/database";
 
 type HomeProps = NativeStackScreenProps<AppScreens, "Home">;
 
@@ -15,10 +17,10 @@ const Home = ({ navigation }: HomeProps) => {
     const menuButtons = [
         { id: "1", label: "Registrar Despesa", onPress: () => { navigation.navigate("RegisterExpense") } },
         { id: "2", label: "Ver Todas", onPress: () => { navigation.navigate("AllExpenses") } },
-        { id: "3", label: "Configurações", onPress: async() => { await handleRemoveName(); } },
+        { id: "3", label: "Configurações", onPress: () => { navigation.navigate("Settings") } },
     ];
-    
     const [name, setName] = useState<string>("");
+    const [expenses, setExpenses] = useState<Expense[]>([]);
 
     useEffect(() => {
         const loadName = async () => {
@@ -28,7 +30,13 @@ const Home = ({ navigation }: HomeProps) => {
                 setName(savedName);
             }
         };
-        
+
+        const getLimitExpenses = async () => {
+            const expenses = await getAllExpenses();
+            setExpenses(expenses)
+        };
+
+        getLimitExpenses();
         loadName();
     }, []);
 
@@ -52,36 +60,15 @@ const Home = ({ navigation }: HomeProps) => {
             <View style={styles.lastExpenses}>
                 <Text style={styles.lastExpensesText}>Despesas mais recentes</Text>
                 <ScrollView showsVerticalScrollIndicator={false}>
-                    <CardExpense
-                        title={"Minha Despesa"}
-                        value={100}
-                        description={"Uma grande despesa"}
-                        date={"14/06/2026 - 16:41"}
-                    />
-                    <CardExpense
-                        title={"Minha Despesa"}
-                        value={100}
-                        description={"Uma grande despesa"}
-                        date={"14/06/2026 - 16:41"}
-                    />
-                    <CardExpense
-                        title={"Minha Despesa"}
-                        value={100}
-                        description={"Uma grande despesa"}
-                        date={"14/06/2026 - 16:41"}
-                    />
-                    <CardExpense
-                        title={"Minha Despesa"}
-                        value={100}
-                        description={"Uma grande despesa"}
-                        date={"14/06/2026 - 16:41"}
-                    />
-                    <CardExpense
-                        title={"Minha Despesa"}
-                        value={100}
-                        description={"Uma grande despesa"}
-                        date={"14/06/2026 - 16:41"}
-                    />
+                    {expenses.length > 0 ? expenses.map((expense) => (
+                        <CardExpense
+                            title={expense.title}
+                            value={expense.value}
+                            description={expense.description}
+                            date={expense.date}
+                        />
+                    )) : <Text style={{ textAlign: "center", fontSize: 24 }}>Sem despesas registradas.</Text>
+                    }
                 </ScrollView>
             </View>
             <Footer />

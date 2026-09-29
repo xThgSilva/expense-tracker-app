@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, TextInput } from 'react-native';
+import { useState } from 'react';
+import { View, Text, TouchableOpacity, TextInput, KeyboardAvoidingView, ScrollView, Platform } from 'react-native';
 import { styles } from '../styles/RegisterExpense';
 import { FontAwesome } from "@react-native-vector-icons/fontawesome";
 import Header from '../components/Header';
@@ -41,25 +41,29 @@ const RegisterExpense = ({ navigation }: RegisterExpenseProps) => {
       <TouchableOpacity style={styles.goBackButton} onPress={() => navigation.navigate("Home")}>
         <FontAwesome name='arrow-left' style={styles.goBackButtonIcon} /><Text style={styles.goBackButtonText}>Voltar</Text>
       </TouchableOpacity>
-      <View style={styles.registerExpenseForm}>
-        <Text style={styles.formTitle}>Adicionar Despesa</Text>
-        <View style={styles.inputGroup}>
-          <Text style={styles.label}>Título da Despesa</Text>
-          <TextInput placeholderTextColor={"#BABABA"} placeholder='Exemplo: abastecer o carro' onChangeText={setExpenseTitle} style={styles.input} />
-        </View>
-        <View style={styles.inputGroup}>
-          <Text style={styles.label}>Descrição (opcional)</Text>
-          <TextInput placeholderTextColor={"#BABABA"} placeholder='Exemplo: abasteci para viajar' onChangeText={setExpenseDescription} style={styles.input} />
-        </View>
-        <View style={styles.inputGroup}>
-          <Text style={styles.label}>Valor</Text>
-          <TextInput placeholderTextColor={"#BABABA"} placeholder='Exemplo: 10,51' keyboardType='numeric' onChangeText={setExpenseValue} style={styles.input} />
-        </View>
-        <TouchableOpacity style={styles.confirmButton} onPress={handleRegisterExpense}>
-          <Text style={styles.confirmButtonText}>Confirmar</Text>
-        </TouchableOpacity>
-        <Text style={[statusStyle === "success" ? styles.success : styles.error]}>{status}</Text>
-      </View>
+      <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"}>
+        <ScrollView>
+          <View style={styles.registerExpenseForm}>
+            <Text style={styles.formTitle}>Adicionar Despesa</Text>
+            <View style={styles.inputGroup}>
+              <Text style={styles.label}>Título da Despesa</Text>
+              <TextInput placeholderTextColor={"#BABABA"} placeholder='Exemplo: abastecer o carro' onChangeText={setExpenseTitle} style={styles.input} />
+            </View>
+            <View style={styles.inputGroup}>
+              <Text style={styles.label}>Descrição (opcional)</Text>
+              <TextInput placeholderTextColor={"#BABABA"} placeholder='Exemplo: abasteci para viajar' onChangeText={setExpenseDescription} style={styles.input} />
+            </View>
+            <View style={styles.inputGroup}>
+              <Text style={styles.label}>Valor</Text>
+              <TextInput placeholderTextColor={"#BABABA"} placeholder='Exemplo: 10,51' keyboardType='numeric' onChangeText={setExpenseValue} style={styles.input} />
+            </View>
+            <TouchableOpacity style={styles.confirmButton} onPress={handleRegisterExpense}>
+              <Text style={styles.confirmButtonText}>Confirmar</Text>
+            </TouchableOpacity>
+            <Text style={[statusStyle === "success" ? styles.success : styles.error]}>{status}</Text>
+          </View>
+        </ScrollView>
+      </KeyboardAvoidingView>
       <Footer />
     </View>
   )
