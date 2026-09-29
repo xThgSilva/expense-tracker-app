@@ -5,7 +5,7 @@ import Home from './screens/Home';
 import RegisterExpense from './screens/RegisterExpense';
 import AllExpenses from './screens/AllExpenses';
 import Configurations from './screens/Configurations';
-
+import Loading from './screens/Loading';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { handleGetName } from './services/service';
@@ -19,27 +19,29 @@ export type AppScreens = {
 };
 
 export default function App() {
-  const [savedName, setSavedName] = useState<string | undefined>(undefined);
+  const [savedName, setSavedName] = useState<string | null | undefined>(undefined);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const loadName = async () => {
       const name = await handleGetName();
-
       setSavedName(name);
-      setLoading(false);
     };
 
     loadName();
   }, []);
 
   if (loading) {
-    return null;
+    return <Loading
+      savedName={savedName}
+      setLoading={setLoading}
+    />;
   }
   const Stack = createNativeStackNavigator<AppScreens>();
 
   return (
     <NavigationContainer>
+      <StatusBar style='inverted'/>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         {!savedName && (
           <Stack.Screen name='Identification' component={Identification} />

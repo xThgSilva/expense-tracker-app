@@ -8,7 +8,7 @@ export const handleSaveName = async (name: string) => {
 
         await AsyncStorage.setItem("name", name);
         return true;
-
+    
     } catch (error) {
         console.error(error);
         return false;
@@ -16,16 +16,6 @@ export const handleSaveName = async (name: string) => {
 };
 
 export const handleGetName = async () => {
-    try {
-        const savedName = await AsyncStorage.getItem("name");
-
-        if (savedName) {
-            return savedName;
-        }
-        else {
-            throw new Error("[ERRO]Erro ao buscar o nome do usuário.");
-        }
-    } catch (error) {
-        console.error(error);
-    };
+    const savedName = await AsyncStorage.getItem("name");
+    return savedName;
 };

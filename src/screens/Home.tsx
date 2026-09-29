@@ -7,7 +7,7 @@ import Button from "../components/Button";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { AppScreens } from "../App";
 import { useEffect, useState } from "react";
-import { handleGetName } from "../services/service";
+import { handleGetName, handleRemoveName } from "../services/service";
 
 type HomeProps = NativeStackScreenProps<AppScreens, "Home">;
 
@@ -15,7 +15,7 @@ const Home = ({ navigation }: HomeProps) => {
     const menuButtons = [
         { id: "1", label: "Registrar Despesa", onPress: () => { navigation.navigate("RegisterExpense") } },
         { id: "2", label: "Ver Todas", onPress: () => { navigation.navigate("AllExpenses") } },
-        { id: "3", label: "Configurações", onPress: () => { navigation.navigate("Configurations") } },
+        { id: "3", label: "Configurações", onPress: async() => { await handleRemoveName(); } },
     ];
     
     const [name, setName] = useState<string>("");
@@ -28,7 +28,7 @@ const Home = ({ navigation }: HomeProps) => {
                 setName(savedName);
             }
         };
-
+        
         loadName();
     }, []);
 

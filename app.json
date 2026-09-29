@@ -19,7 +19,7 @@
       "predictiveBackGestureEnabled": false
     },
     "web": {
-      "favicon": ".src/assets/favicon.png"
+      "favicon": "./src/assets/favicon.png"
     },
     "plugins": [
       "@react-native-vector-icons/fontawesome"
