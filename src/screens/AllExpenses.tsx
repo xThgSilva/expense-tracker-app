@@ -10,7 +10,7 @@ import Button from "../components/Button";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { AppScreens } from "../App";
 import { Expense } from "../interfaces/interfaces";
-import { getAllExpenses } from "../database/database";
+import { filterExpensesByDate, getAllExpenses } from "../database/database";
 
 type AllEspensesProps = NativeStackScreenProps<AppScreens, "AllExpenses">;
 
@@ -22,18 +22,30 @@ const AllExpenses = ({ navigation }: AllEspensesProps) => {
     ];
 
     const [isOpen, setIsOpen] = useState<boolean>(false);
-    const [filterType, setFilterType] = useState<7 | 14 | 30>(7)
+    const [filterType, setFilterType] = useState<7 | 14 | 30 | null>(null)
     const [expenses, setExpenses] = useState<Expense[]>([]);
     const [page, setPage] = useState<number>(1);
 
     useEffect(() => {
-        const getExpenses = async () => {
-            const expenses = await getAllExpenses(page, 10);
-            setExpenses(expenses);
-        }
+        if (filterType) {
+            const filterExpenses = async () => {
+                const date = new Date();
+                date.setDate(date.getDate() - filterType);
 
-        getExpenses();
-    }, [page]);
+                const filteredExpenses = await filterExpensesByDate(date.toISOString());
+                setExpenses(filteredExpenses);
+            };
+
+            filterExpenses();
+        } else {
+            const getExpenses = async () => {
+                const expenses = await getAllExpenses(page, 10);
+                setExpenses(expenses);
+            };
+
+            getExpenses();
+        }
+    }, [page, filterType]);
 
     return (
         <View style={styles.container}>
@@ -92,7 +104,7 @@ const AllExpenses = ({ navigation }: AllEspensesProps) => {
 
                     <TouchableOpacity
                         style={[styles.paginationButton, expenses.length < 10 && styles.paginationButtonDisabled]}
-                        disabled={expenses.length < 10} 
+                        disabled={expenses.length < 10}
                         onPress={() => setPage(page + 1)}
                     >
                         <Text>Próxima página</Text>

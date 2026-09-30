@@ -34,12 +34,8 @@ export const getAllExpenses = async (page: number, size: number) => {
     const offset = (page - 1) * size;
 
     const expenses = await db.getAllAsync<Expense>(
-        `SELECT * 
-         FROM tb_expenses
-         ORDER BY id DESC
-         LIMIT ? OFFSET ?`,
-        size,
-        offset
+        `SELECT * FROM tb_expenses ORDER BY id DESC LIMIT ? OFFSET ?`,
+        size, offset
     );
 
     return expenses;
@@ -48,6 +44,16 @@ export const getAllExpenses = async (page: number, size: number) => {
 export const getRecentlyExpenses = async () => {
     const db = await getDatabase();
     const expenses = await db.getAllAsync<Expense>("SELECT * FROM tb_expenses ORDER BY id DESC LIMIT 5");
+
+    return expenses;
+};
+
+export const filterExpensesByDate = async(date: string) => {
+    const db = await getDatabase();
+
+    const expenses = await db.getAllAsync<Expense>(`
+        SELECT * FROM tb_expenses WHERE created_at >= ? ORDER BY id DESC
+        `, date)
 
     return expenses;
 };
