@@ -9,7 +9,7 @@ import { AppScreens } from "../App";
 import { useEffect, useState } from "react";
 import { handleGetName } from "../services/service";
 import { Expense } from "../interfaces/interfaces";
-import { getAllExpenses } from "../database/database";
+import { getRecentlyExpenses } from "../database/database";
 
 type HomeProps = NativeStackScreenProps<AppScreens, "Home">;
 
@@ -32,7 +32,7 @@ const Home = ({ navigation }: HomeProps) => {
         };
 
         const getLimitExpenses = async () => {
-            const expenses = await getAllExpenses();
+            const expenses = await getRecentlyExpenses();
             setExpenses(expenses)
         };
 

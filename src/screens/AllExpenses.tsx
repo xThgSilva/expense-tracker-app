@@ -5,10 +5,12 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import CardExpense from "../components/CardExpense";
 import Modal from "react-native-modal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../components/Button";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { AppScreens } from "../App";
+import { Expense } from "../interfaces/interfaces";
+import { getAllExpenses } from "../database/database";
 
 type AllEspensesProps = NativeStackScreenProps<AppScreens, "AllExpenses">;
 
@@ -21,6 +23,17 @@ const AllExpenses = ({ navigation }: AllEspensesProps) => {
 
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [filterType, setFilterType] = useState<7 | 14 | 30>(7)
+    const [expenses, setExpenses] = useState<Expense[]>([]);
+    const [page, setPage] = useState<number>(1);
+
+    useEffect(() => {
+        const getExpenses = async () => {
+            const expenses = await getAllExpenses(page, 10);
+            setExpenses(expenses);
+        }
+
+        getExpenses();
+    }, [page]);
 
     return (
         <View style={styles.container}>
@@ -57,37 +70,34 @@ const AllExpenses = ({ navigation }: AllEspensesProps) => {
                     </TouchableOpacity>
                 </View>
                 <ScrollView showsVerticalScrollIndicator={false} style={styles.filterList}>
-                    <CardExpense
-                        title={"Minha Despesa"}
-                        value={100}
-                        description={"Uma grande despesa"}
-                        date={"14/06/2026 - 16:41"}
-                    />
-                    <CardExpense
-                        title={"Minha Despesa"}
-                        value={100}
-                        description={"Uma grande despesa"}
-                        date={"14/06/2026 - 16:41"}
-                    />
-                    <CardExpense
-                        title={"Minha Despesa"}
-                        value={100}
-                        description={"Uma grande despesa"}
-                        date={"14/06/2026 - 16:41"}
-                    />
-                    <CardExpense
-                        title={"Minha Despesa"}
-                        value={100}
-                        description={"Uma grande despesa"}
-                        date={"14/06/2026 - 16:41"}
-                    />
-                    <CardExpense
-                        title={"Minha Despesa"}
-                        value={100}
-                        description={"Uma grande despesa"}
-                        date={"14/06/2026 - 16:41"}
-                    />
+                    {expenses.length > 0 ? expenses.map((expense) => (
+                        <CardExpense
+                            key={expense.id}
+                            title={expense.title}
+                            value={expense.value}
+                            description={expense.description}
+                            created_at={expense.created_at}
+                        />
+                    )) : <Text style={styles.noExpenses}>Sem despesas registradas.</Text>
+                    }
                 </ScrollView>
+                <View style={styles.paginationView}>
+                    <TouchableOpacity
+                        style={[styles.paginationButton, page <= 1 && styles.paginationButtonDisabled]}
+                        disabled={page <= 1}
+                        onPress={() => setPage(page - 1)}
+                    >
+                        <Text>Página anterior</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity
+                        style={[styles.paginationButton, expenses.length < 10 && styles.paginationButtonDisabled]}
+                        disabled={expenses.length < 10} 
+                        onPress={() => setPage(page + 1)}
+                    >
+                        <Text>Próxima página</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
             <Footer />
             <Modal

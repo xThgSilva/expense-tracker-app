@@ -27,7 +27,7 @@ export const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
-        paddingHorizontal: 0 
+        paddingHorizontal: 0
     },
     filterHeaderText: {
         color: "#282828",
@@ -57,7 +57,6 @@ export const styles = StyleSheet.create({
     },
     filterSection: {
         flex: 1,
-        paddingBottom: 12
     },
     filterSectionHeader: {
         flexDirection: "row",
@@ -92,37 +91,6 @@ export const styles = StyleSheet.create({
     expensesList: {
         padding: 12,
     },
-    expenseCard: {
-        backgroundColor: "#C3C1C1",
-        padding: 16,
-        borderRadius: 11,
-        gap: 8,
-        marginBottom: 12
-    },
-    cardHeader: {
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "center"
-    },
-    expenseTitle: {
-        fontSize: 18,
-        fontWeight: "bold",
-    },
-    expenseValue: {
-        color: "#03993c",
-        fontSize: 14,
-    },
-    cardContent: {
-        gap: 12
-    },
-    expenseDescription: {
-        fontSize: 14,
-        width: "75%"
-    },
-    expenseDate: {
-        textAlign: "right",
-        fontSize: 12
-    },
     questionModal: {
         alignSelf: "center",
         margin: 0,
@@ -156,5 +124,21 @@ export const styles = StyleSheet.create({
         color: "#FFF",
         textAlign: "center",
         fontSize: 14
+    },
+    noExpenses: {
+        textAlign: "center",
+        fontSize: 16,
+        marginTop: 24
+    },
+    paginationView: {
+        flexDirection: "row",
+        justifyContent: "space-evenly",
+        paddingVertical: 16
+    },
+    paginationButton: {
+        padding: 8,
+    },
+    paginationButtonDisabled: {
+        opacity: 0.4
     }
 });
