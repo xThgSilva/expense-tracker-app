@@ -23,7 +23,8 @@
     },
     "plugins": [
       "@react-native-vector-icons/fontawesome",
-      "expo-sqlite"
+      "expo-sqlite",
+      "expo-sharing"
     ]
   }
 }

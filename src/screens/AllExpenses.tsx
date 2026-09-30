@@ -11,14 +11,15 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { AppScreens } from "../App";
 import { Expense } from "../interfaces/interfaces";
 import { filterExpensesByDate, getAllExpenses } from "../database/database";
+import { generateReport } from "../services/service";
 
 type AllEspensesProps = NativeStackScreenProps<AppScreens, "AllExpenses">;
 
 const AllExpenses = ({ navigation }: AllEspensesProps) => {
     const filterButtons = [
-        { id: "1", label: "Últimos 7 dias", onPress: () => { setFilterType(7) } },
-        { id: "2", label: "Últimos 14 dias", onPress: () => { setFilterType(14) } },
-        { id: "3", label: "Últimos 30 dias", onPress: () => { setFilterType(30) } },
+        { id: "7", label: "Últimos 7 dias", onPress: () => { setFilterType(7) } },
+        { id: "14", label: "Últimos 14 dias", onPress: () => { setFilterType(14) } },
+        { id: "30", label: "Últimos 30 dias", onPress: () => { setFilterType(30) } },
     ];
 
     const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -47,6 +48,10 @@ const AllExpenses = ({ navigation }: AllEspensesProps) => {
         }
     }, [page, filterType]);
 
+    const handleGenerateReport = () => {
+        generateReport(expenses);
+    };
+
     return (
         <View style={styles.container}>
             <Header headerTitle="Minhas Despesas" />
@@ -65,8 +70,14 @@ const AllExpenses = ({ navigation }: AllEspensesProps) => {
                         <Button
                             key={button.id}
                             label={button.label}
-                            buttonStyle={styles.filterButton}
-                            onPress={button.onPress}
+                            buttonStyle={[styles.filterButton, filterType != Number(button.id) ? styles.disabled : styles.filterButton]}
+                            onPress={() => {
+                                if (filterType === Number(button.id)) {
+                                    setFilterType(null);
+                                } else {
+                                    setFilterType(Number(button.id) as 7 | 14 | 30);
+                                }
+                            }}
                         />
                     ))}
                 </ScrollView>
@@ -77,7 +88,7 @@ const AllExpenses = ({ navigation }: AllEspensesProps) => {
                     <TouchableOpacity onPress={() => setIsOpen(true)}>
                         <FontAwesome style={styles.questionButtonText} name="question-circle" />
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.relatoryButton}>
+                    <TouchableOpacity style={styles.relatoryButton} onPress={handleGenerateReport}>
                         <Text style={styles.relatoryButtonText}>Gerar Relatório</Text>
                     </TouchableOpacity>
                 </View>
@@ -95,7 +106,7 @@ const AllExpenses = ({ navigation }: AllEspensesProps) => {
                 </ScrollView>
                 <View style={styles.paginationView}>
                     <TouchableOpacity
-                        style={[styles.paginationButton, page <= 1 && styles.paginationButtonDisabled]}
+                        style={[styles.paginationButton, page <= 1 && styles.disabled]}
                         disabled={page <= 1}
                         onPress={() => setPage(page - 1)}
                     >
@@ -103,7 +114,7 @@ const AllExpenses = ({ navigation }: AllEspensesProps) => {
                     </TouchableOpacity>
 
                     <TouchableOpacity
-                        style={[styles.paginationButton, expenses.length < 10 && styles.paginationButtonDisabled]}
+                        style={[styles.paginationButton, expenses.length < 10 && styles.disabled]}
                         disabled={expenses.length < 10}
                         onPress={() => setPage(page + 1)}
                     >
@@ -125,7 +136,7 @@ const AllExpenses = ({ navigation }: AllEspensesProps) => {
                 <View style={styles.modalContent}>
                     <Text style={styles.modalTitle}>Gerar Relatório</Text>
                     <Text style={styles.modalText}>A função "Gerar Relatório" gera um relatório sobre suas despesas. O relatório será baixado no seu celular e será possível compartilhá-lo com outros</Text>
-                    <TouchableOpacity style={styles.modalLeftButton} onPress={() => setIsOpen(false)}>
+                    <TouchableOpacity style={styles.modalLeftButton} onPress={() => setIsOpen(false)} >
                         <Text style={styles.modalLeftButtonText}>Entendi</Text>
                     </TouchableOpacity>
                 </View>

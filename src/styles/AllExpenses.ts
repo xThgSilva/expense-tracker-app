@@ -138,7 +138,7 @@ export const styles = StyleSheet.create({
     paginationButton: {
         padding: 8,
     },
-    paginationButtonDisabled: {
+    disabled: {
         opacity: 0.4
     }
 });

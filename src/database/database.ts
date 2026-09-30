@@ -48,7 +48,7 @@ export const getRecentlyExpenses = async () => {
     return expenses;
 };
 
-export const filterExpensesByDate = async(date: string) => {
+export const filterExpensesByDate = async (date: string) => {
     const db = await getDatabase();
 
     const expenses = await db.getAllAsync<Expense>(`
