@@ -16,7 +16,8 @@
         "backgroundImage": "./src/assets/android-icon-background.png",
         "monochromeImage": "./src/assets/android-icon-monochrome.png"
       },
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.th1ago8.controlegastos"
     },
     "web": {
       "favicon": "./src/assets/favicon.png"
@@ -25,6 +26,11 @@
       "@react-native-vector-icons/fontawesome",
       "expo-sqlite",
       "expo-sharing"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "2ffd0c17-3260-4583-aaa0-4c9ed62c5461"
+      }
+    }
   }
 }

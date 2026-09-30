@@ -2,7 +2,11 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Expense } from "../interfaces/interfaces";
 import { File, Paths } from "expo-file-system";
 import * as Sharing from "expo-sharing";
-import { getExpensesToExport, importExpenses } from "../database/database";
+import { createExpensesTable, getExpensesToExport, importExpenses } from "../database/database";
+
+export const initializeDatabase = async () => {
+    await createExpensesTable();
+};
 
 export const handleSaveName = async (name: string) => {
     try {

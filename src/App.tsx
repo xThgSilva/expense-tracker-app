@@ -8,7 +8,7 @@ import Settings from './screens/Settings';
 import Loading from './screens/Loading';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { handleGetName } from './services/service';
+import { handleGetName, initializeDatabase } from './services/service';
 
 export type AppScreens = {
   Identification: undefined;
@@ -23,11 +23,14 @@ export default function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const loadName = async () => {
+    const initializeApp = async () => {
       const name = await handleGetName();
+
       setSavedName(name);
+      initializeDatabase();
     };
-    loadName();
+
+    initializeApp();
   }, []);
 
   if (loading) {
