@@ -19,6 +19,15 @@ export const createExpensesTable = async () => {
         );`);
 };
 
+export const registerExpense = async (data: Omit<Expense, "id">) => {
+    const db = await getDatabase();
+
+    await db.runAsync(`
+        INSERT INTO tb_expenses (title, description, value, created_at) VALUES(?, ?, ?, ?)`,
+        data.title, data.description, data.value, data.created_at
+    );
+};
+
 export const getAllExpenses = async () => {
     const db = await getDatabase();
     const expenses = await db.getAllAsync<Expense>("SELECT * FROM tb_expenses ORDER BY id DESC LIMIT 5");

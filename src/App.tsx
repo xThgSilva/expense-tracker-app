@@ -9,6 +9,7 @@ import Loading from './screens/Loading';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { handleGetName } from './services/service';
+import { createExpensesTable, dropDatabase } from './database/database';
 
 export type AppScreens = {
   Identification: undefined;

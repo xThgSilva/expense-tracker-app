@@ -40,5 +40,10 @@ export const styles = StyleSheet.create({
         fontSize: 24,
         fontWeight: "bold",
         color: "#282828"
+    },
+    noExpenses: {
+        textAlign: "center",
+        fontSize: 16,
+        marginTop: 24
     }
 });

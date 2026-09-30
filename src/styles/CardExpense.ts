@@ -22,7 +22,7 @@ export const styles = StyleSheet.create({
         fontSize: 16,
     },
     cardContent: {
-        gap: 12
+        gap: 20
     },
     expenseDescription: {
         fontSize: 16,

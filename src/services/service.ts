@@ -19,3 +19,8 @@ export const handleGetName = async () => {
     const savedName = await AsyncStorage.getItem("name");
     return savedName;
 };
+
+// TESTS
+export const handleDelete = async() => {
+    await AsyncStorage.removeItem("name");
+};

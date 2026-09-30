@@ -6,12 +6,14 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { AppScreens } from '../App';
+import { Expense } from '../interfaces/interfaces';
+import { registerExpense } from '../database/database';
 
 type RegisterExpenseProps = NativeStackScreenProps<AppScreens, "RegisterExpense">;
 
 const RegisterExpense = ({ navigation }: RegisterExpenseProps) => {
   const [expenseTitle, setExpenseTitle] = useState<string>("");
-  const [expenseDescription, setExpenseDescription] = useState<string>("");
+  const [expenseDescription, setExpenseDescription] = useState<string | null>(null);
   const [expenseValue, setExpenseValue] = useState<string>("");
 
   const [statusStyle, setStatusStyle] = useState<"success" | "error" | "">("");
@@ -22,6 +24,15 @@ const RegisterExpense = ({ navigation }: RegisterExpenseProps) => {
       if (expenseTitle === "" || expenseValue === "") {
         throw new Error("[ERRO]: O título da despesa e o valor são obrigatórios!");
       }
+
+      const expense: Omit<Expense, "id"> = {
+        title: expenseTitle,
+        description: expenseDescription,
+        value: Number(expenseValue),
+        created_at: new Date().toISOString()
+      };
+      registerExpense(expense);
+
     } catch (error) {
       if (error instanceof Error) {
         setStatus(error.message);

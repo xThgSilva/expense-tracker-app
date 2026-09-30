@@ -62,12 +62,13 @@ const Home = ({ navigation }: HomeProps) => {
                 <ScrollView showsVerticalScrollIndicator={false}>
                     {expenses.length > 0 ? expenses.map((expense) => (
                         <CardExpense
+                            key={expense.id}
                             title={expense.title}
                             value={expense.value}
                             description={expense.description}
-                            date={expense.date}
+                            created_at={expense.created_at}
                         />
-                    )) : <Text style={{ textAlign: "center", fontSize: 24 }}>Sem despesas registradas.</Text>
+                    )) : <Text style={styles.noExpenses}>Sem despesas registradas.</Text>
                     }
                 </ScrollView>
             </View>

@@ -1,7 +1,7 @@
 export interface Expense {
-    readonly id:number;
+    readonly id: number;
     title: string;
     description: string | null;
     value: number;
-    date: string;
+    created_at: string;
 };
