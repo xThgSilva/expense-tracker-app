@@ -2,6 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Expense } from "../interfaces/interfaces";
 import { File, Paths } from "expo-file-system";
 import * as Sharing from "expo-sharing";
+import { getExpensesToExport, importExpenses } from "../database/database";
 
 export const handleSaveName = async (name: string) => {
     try {
@@ -35,12 +36,38 @@ export const generateReport = async (expenseList: Expense[]) => {
         `
     })
 
-    const file = new File(Paths.document, "relatorio5''.txt");
+    const file = new File(Paths.document, "relatorio.txt");
     file.create();
     file.write(report);
 
     await Sharing.shareAsync(file.uri);
 };
+
+export const exportData = async() => {
+    const expensesList = await getExpensesToExport();
+
+    const json = JSON.stringify(expensesList);
+
+    const file = new File(Paths.document, "export-data.json");
+    file.create();
+    file.write(json)
+
+    await Sharing.shareAsync(file.uri);
+}
+
+export const importData = async() => {
+    const file = await File.pickFileAsync({multipleFiles: false, mimeTypes: "application/json"});
+    
+    if (file.canceled) {
+        return;
+    }
+
+    const selectedFile = file.result;
+    const content = await selectedFile.text();
+    const json = JSON.parse(content);
+    
+    await importExpenses(json);
+}
 
 // TESTS
 export const handleDelete = async () => {

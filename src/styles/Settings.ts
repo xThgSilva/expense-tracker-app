@@ -50,7 +50,7 @@ export const styles = StyleSheet.create({
         padding: 24,
         borderRadius: 12,
         alignItems: "center",
-        gap: 24,
+        gap: 24
     },
     modalTitle: {
         color: "#282828",
@@ -62,14 +62,14 @@ export const styles = StyleSheet.create({
     },
     modalLeftButton: {
         backgroundColor: "#D50303",
-        paddingVertical: 8,
-        paddingHorizontal: 16,
+        paddingVertical: 12,
+        paddingHorizontal: 24,
         borderRadius: 12,
-        width: 100
+        width: 125
     },
     modalLeftButtonText: {
         color: "#FFF",
         textAlign: "center",
-        fontSize: 14
+        fontSize: 16
     }
 });

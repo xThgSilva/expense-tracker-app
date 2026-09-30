@@ -58,6 +58,31 @@ export const filterExpensesByDate = async (date: string) => {
     return expenses;
 };
 
+export const getExpensesToExport = async () => {
+    const db = await getDatabase();
+
+    const expenses = await db.getAllAsync<Expense>("SELECT * FROM tb_expenses");
+    return expenses;
+}
+
+export const importExpenses = async (expenses: Expense[]) => {
+    const db = await getDatabase();
+
+    await db.withTransactionAsync(async () => {
+        for (const expense of expenses) {
+            await db.runAsync(
+                `INSERT INTO tb_expenses
+            (title, description, value, created_at)
+            VALUES (?, ?, ?, ?)`,
+                expense.title,
+                expense.description,
+                expense.value,
+                expense.created_at
+            );
+        }
+    });
+};
+
 // TESTS
 export const dropDatabase = async () => {
     const db = await getDatabase()

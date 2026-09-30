@@ -1,4 +1,4 @@
-import { View, TouchableOpacity, Text, ScrollView } from "react-native";
+import { View, TouchableOpacity, Text, ScrollView, ActivityIndicator } from "react-native";
 import { FontAwesome } from "@react-native-vector-icons/fontawesome";
 import { styles } from "../styles/AllExpenses"
 import Header from "../components/Header";
@@ -26,6 +26,7 @@ const AllExpenses = ({ navigation }: AllEspensesProps) => {
     const [filterType, setFilterType] = useState<7 | 14 | 30 | null>(null)
     const [expenses, setExpenses] = useState<Expense[]>([]);
     const [page, setPage] = useState<number>(1);
+    const [loadingReport, setLoadingReport] = useState<boolean>(false);
 
     useEffect(() => {
         if (filterType) {
@@ -48,8 +49,13 @@ const AllExpenses = ({ navigation }: AllEspensesProps) => {
         }
     }, [page, filterType]);
 
-    const handleGenerateReport = () => {
-        generateReport(expenses);
+    const handleGenerateReport = async () => {
+        setLoadingReport(true);
+        try {
+            await generateReport(expenses);
+        } finally {
+            setLoadingReport(false);
+        }
     };
 
     return (
@@ -89,8 +95,13 @@ const AllExpenses = ({ navigation }: AllEspensesProps) => {
                         <FontAwesome style={styles.questionButtonText} name="question-circle" />
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.relatoryButton} onPress={handleGenerateReport}>
-                        <Text style={styles.relatoryButtonText}>Gerar Relatório</Text>
-                    </TouchableOpacity>
+                        {loadingReport ? (
+                            <ActivityIndicator size={20} color="#FFF" />
+                        ) : (
+                            <Text style={styles.relatoryButtonText}>
+                                Gerar Relatório
+                            </Text>
+                        )}</TouchableOpacity>
                 </View>
                 <ScrollView showsVerticalScrollIndicator={false} style={styles.filterList}>
                     {expenses.length > 0 ? expenses.map((expense) => (
