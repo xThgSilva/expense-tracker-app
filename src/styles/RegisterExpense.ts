@@ -47,6 +47,7 @@ export const styles = StyleSheet.create({
         borderColor: "#C3C1C1",
         paddingVertical: 12,
         paddingHorizontal: 24,
+        color:"#282828"
     },
     confirmButton: {
         alignSelf: "center",

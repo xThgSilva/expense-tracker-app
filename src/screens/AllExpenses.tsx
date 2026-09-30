@@ -10,16 +10,16 @@ import Button from "../components/Button";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { AppScreens } from "../App";
 import { Expense } from "../interfaces/interfaces";
-import { filterExpensesByDate, getAllExpenses } from "../database/database";
+import { filterExpensesByDateAndPagination, getAllExpenses } from "../database/database";
 import { generateReport } from "../services/service";
 
 type AllEspensesProps = NativeStackScreenProps<AppScreens, "AllExpenses">;
 
 const AllExpenses = ({ navigation }: AllEspensesProps) => {
     const filterButtons = [
-        { id: "7", label: "Últimos 7 dias", onPress: () => { setFilterType(7) } },
-        { id: "14", label: "Últimos 14 dias", onPress: () => { setFilterType(14) } },
-        { id: "30", label: "Últimos 30 dias", onPress: () => { setFilterType(30) } },
+        { id: "7", label: "Últimos 7 dias" },
+        { id: "14", label: "Últimos 14 dias" },
+        { id: "30", label: "Últimos 30 dias" },
     ];
 
     const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -28,13 +28,22 @@ const AllExpenses = ({ navigation }: AllEspensesProps) => {
     const [page, setPage] = useState<number>(1);
     const [loadingReport, setLoadingReport] = useState<boolean>(false);
 
+    const handleGenerateReport = async () => {
+        setLoadingReport(true);
+        try {
+            await generateReport(expenses);
+        } finally {
+            setLoadingReport(false);
+        }
+    };
+
     useEffect(() => {
         if (filterType) {
             const filterExpenses = async () => {
                 const date = new Date();
                 date.setDate(date.getDate() - filterType);
 
-                const filteredExpenses = await filterExpensesByDate(date.toISOString());
+                const filteredExpenses = await filterExpensesByDateAndPagination(date.toISOString(), page, 10);
                 setExpenses(filteredExpenses);
             };
 
@@ -49,18 +58,9 @@ const AllExpenses = ({ navigation }: AllEspensesProps) => {
         }
     }, [page, filterType]);
 
-    const handleGenerateReport = async () => {
-        setLoadingReport(true);
-        try {
-            await generateReport(expenses);
-        } finally {
-            setLoadingReport(false);
-        }
-    };
-
     return (
         <View style={styles.container}>
-            <Header headerTitle="Minhas Despesas" />
+            <Header headerTitle="Minhas Despesas" iconName="money" />
             <TouchableOpacity style={styles.goBackButton} onPress={() => navigation.navigate("Home")}>
                 <FontAwesome name='arrow-left' style={styles.goBackButtonIcon} /><Text style={styles.goBackButtonText}>Voltar</Text>
             </TouchableOpacity>
@@ -78,11 +78,15 @@ const AllExpenses = ({ navigation }: AllEspensesProps) => {
                             label={button.label}
                             buttonStyle={[styles.filterButton, filterType != Number(button.id) ? styles.disabled : styles.filterButton]}
                             onPress={() => {
-                                if (filterType === Number(button.id)) {
+                                const selectedFilter = Number(button.id) as 7 | 14 | 30;
+                                
+                                if (filterType === selectedFilter) {
                                     setFilterType(null);
                                 } else {
-                                    setFilterType(Number(button.id) as 7 | 14 | 30);
+                                    setFilterType(selectedFilter);
                                 }
+
+                                setPage(1);
                             }}
                         />
                     ))}

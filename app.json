@@ -2,9 +2,9 @@
   "expo": {
     "name": "Controle de Gastos",
     "slug": "controle-gastos",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
-    "icon": "./src/assets/icon.png",
+    "icon": "./src/assets/imgs/icon.jpg",
     "userInterfaceStyle": "light",
     "ios": {
       "supportsTablet": true

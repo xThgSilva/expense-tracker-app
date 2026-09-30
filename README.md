@@ -23,8 +23,12 @@ The app was designed to work offline, keeping expense data stored locally on the
 - TypeScript
 - React Native
 - Expo
+- React Navigation
 - SQLite
 - AsyncStorage
+- Expo FileSystem
+- Expo Sharing
+- FontAwesome Icons
 
 ## Features
 - User identification using AsyncStorage
@@ -50,4 +54,4 @@ The app was designed to work offline, keeping expense data stored locally on the
     ```
     
 ## Versions
-See VERSIONS.md for the project changelog.
+See [Versions](VERSIONS.md) for the project changelog.

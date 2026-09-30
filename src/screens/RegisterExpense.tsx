@@ -19,7 +19,7 @@ const RegisterExpense = ({ navigation }: RegisterExpenseProps) => {
   const [statusStyle, setStatusStyle] = useState<"success" | "error" | "">("");
   const [status, setStatus] = useState<string>("");
 
-  const handleRegisterExpense = () => {
+  const handleRegisterExpense = async () => {
     try {
       if (expenseTitle === "" || expenseValue === "") {
         throw new Error("[ERRO]: O título da despesa e o valor são obrigatórios!");
@@ -31,7 +31,7 @@ const RegisterExpense = ({ navigation }: RegisterExpenseProps) => {
         value: Number(expenseValue),
         created_at: new Date().toISOString()
       };
-      registerExpense(expense);
+      await registerExpense(expense);
 
     } catch (error) {
       if (error instanceof Error) {
@@ -48,7 +48,7 @@ const RegisterExpense = ({ navigation }: RegisterExpenseProps) => {
 
   return (
     <View style={styles.container}>
-      <Header headerTitle='Área de Registro' />
+      <Header headerTitle='Área de Registro' iconName='money' />
       <TouchableOpacity style={styles.goBackButton} onPress={() => navigation.navigate("Home")}>
         <FontAwesome name='arrow-left' style={styles.goBackButtonIcon} /><Text style={styles.goBackButtonText}>Voltar</Text>
       </TouchableOpacity>

@@ -3,6 +3,7 @@ import { Expense } from "../interfaces/interfaces";
 import { File, Paths } from "expo-file-system";
 import * as Sharing from "expo-sharing";
 import { createExpensesTable, getExpensesToExport, importExpenses } from "../database/database";
+import { Alert } from "react-native";
 
 export const initializeDatabase = async () => {
     await createExpensesTable();
@@ -34,34 +35,81 @@ export const generateReport = async (expenseList: Expense[]) => {
     expenseList.forEach((expense) => {
         report += `
             Titulo: ${expense.title};
-            Descricao: ${expense.description === null && "Descricao nao informada."};
+            Descricao: ${expense.description === null ? "Descricao nao informada." : expense.description};
             Valor: ${expense.value};
             Data: ${new Date(expense.created_at).toISOString()}
         `
     })
 
     const file = new File(Paths.document, "relatorio.txt");
+
+    if (file.exists) {
+        Alert.alert(
+            "Arquivo já gerado",
+            "Deseja gerar novamente?",
+            [
+                {
+                    text: "Cancelar",
+                },
+                {
+                    text: "Gerar novamente",
+                    onPress: async () => {
+                        file.delete()
+                        file.create();
+                        file.write(report);
+
+                        await Sharing.shareAsync(file.uri);
+                    }
+                }
+            ]
+        );
+
+        return;
+    }
+
     file.create();
     file.write(report);
-
     await Sharing.shareAsync(file.uri);
 };
 
-export const exportData = async() => {
+export const exportData = async () => {
     const expensesList = await getExpensesToExport();
 
     const json = JSON.stringify(expensesList);
 
     const file = new File(Paths.document, "export-data.json");
-    file.create();
-    file.write(json)
 
+    if (file.exists) {
+        Alert.alert(
+            "Arquivo já gerado",
+            "Deseja gerar novamente?",
+            [
+                {
+                    text: "Cancelar",
+                },
+                {
+                    text: "Gerar novamente",
+                    onPress: async () => {
+                        file.delete()
+                        file.create();
+                        file.write(json);
+
+                        await Sharing.shareAsync(file.uri);
+                    }
+                }
+            ]
+        );
+        return;
+    }
+
+    file.create();
+    file.write(json);
     await Sharing.shareAsync(file.uri);
 }
 
-export const importData = async() => {
-    const file = await File.pickFileAsync({multipleFiles: false, mimeTypes: "application/json"});
-    
+export const importData = async () => {
+    const file = await File.pickFileAsync({ multipleFiles: false, mimeTypes: "application/json" });
+
     if (file.canceled) {
         return;
     }
@@ -69,7 +117,7 @@ export const importData = async() => {
     const selectedFile = file.result;
     const content = await selectedFile.text();
     const json = JSON.parse(content);
-    
+
     await importExpenses(json);
 }
 

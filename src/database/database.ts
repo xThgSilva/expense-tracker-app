@@ -2,7 +2,7 @@ import * as SQLite from "expo-sqlite";
 import { Expense } from "../interfaces/interfaces";
 
 export const getDatabase = async () => {
-    const db = await SQLite.openDatabaseAsync("expenses.db");
+    const db = await SQLite.openDatabaseAsync("expenses.db", {useNewConnection: true    });
     return db;
 };
 
@@ -28,6 +28,13 @@ export const registerExpense = async (data: Omit<Expense, "id">) => {
     );
 };
 
+export const getRecentlyExpenses = async () => {
+    const db = await getDatabase();
+    const expenses = await db.getAllAsync<Expense>("SELECT * FROM tb_expenses ORDER BY id DESC LIMIT 5");
+
+    return expenses;
+};
+
 export const getAllExpenses = async (page: number, size: number) => {
     const db = await getDatabase();
 
@@ -41,19 +48,15 @@ export const getAllExpenses = async (page: number, size: number) => {
     return expenses;
 };
 
-export const getRecentlyExpenses = async () => {
-    const db = await getDatabase();
-    const expenses = await db.getAllAsync<Expense>("SELECT * FROM tb_expenses ORDER BY id DESC LIMIT 5");
-
-    return expenses;
-};
-
-export const filterExpensesByDate = async (date: string) => {
+export const filterExpensesByDateAndPagination = async(date: string, page: number, size: number) => {
     const db = await getDatabase();
 
-    const expenses = await db.getAllAsync<Expense>(`
-        SELECT * FROM tb_expenses WHERE created_at >= ? ORDER BY id DESC
-        `, date)
+    const offset = (page - 1) * size;
+
+    const expenses = await db.getAllAsync<Expense>(
+        `SELECT * FROM tb_expenses WHERE created_at >= ? ORDER BY id DESC LIMIT ? OFFSET ?`,
+        date, size, offset
+    );
 
     return expenses;
 };

@@ -42,7 +42,7 @@ const Home = ({ navigation }: HomeProps) => {
 
     return (
         <View style={styles.container}>
-            <Header headerTitle="Início" />
+            <Header headerTitle="Início" iconName="home" />
             <Text style={styles.welcomeText}>Olá, {name}!</Text>
             <View style={styles.optionsMenu} >
                 <Text style={styles.menuTitle}>Menu de Opções</Text>

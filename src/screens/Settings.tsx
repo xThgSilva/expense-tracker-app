@@ -37,7 +37,7 @@ const Configurations = ({ navigation }: ConfigurationsProps) => {
 
     return (
         <View style={styles.container}>
-            <Header headerTitle={"Configurações"} />
+            <Header headerTitle={"Configurações"} iconName="gear" />
             <TouchableOpacity style={styles.goBackButton} onPress={() => navigation.navigate("Home")}>
                 <FontAwesome name='arrow-left' style={styles.goBackButtonIcon} /><Text style={styles.goBackButtonText}>Voltar</Text>
             </TouchableOpacity>
